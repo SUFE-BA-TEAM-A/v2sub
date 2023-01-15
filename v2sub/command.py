@@ -103,6 +103,18 @@ def run(name, port):
         unit = systemd.start(["v2ray", "-config", config.V2RAY_CONFIG_FILE])
         utils.write_to_json(unit, systemd.SYSTEMD_UNIT)
 
+@cli.command()
+@click.option("--name", default=DEFAULT_SUBSCRIBE,
+              help="the name of the subscribe you want run with. if not "
+                   "provided, the default subscribe will be run.")
+@click.option("--port", type=click.INT, default=1080,
+              help="the local port v2ray client listen on, default is 1080")
+@click.option("--index", type=click.INT, default=10,
+              help="server index")
+def gen(name, port, index):
+    node = subscribe.get_node(index, name)
+    config.update_config(node, port)
+    
 
 @cli.command()
 def stop():
