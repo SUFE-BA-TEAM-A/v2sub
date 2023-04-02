@@ -18,6 +18,18 @@ def _get_config(addr: str, port: int, id_: str, client_port=1080) -> dict:
                     "auth": "noauth",
                     "udp": True
                 }
+            },
+            {
+                "port": client_port + 1,
+                "listen": "127.0.0.1",
+                "protocol": "http",
+                "sniffing": {
+                    "enable": False
+                },
+                "settings": {
+                    "auth": "noauth",
+                    "udp": True
+                }
             }
         ],
         "outbounds": [
